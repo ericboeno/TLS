@@ -1,0 +1,336 @@
+/* Estilos Gerais */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f2f5; /* Fundo principal: Cinza muito claro */
+    color: #333; /* Cor do texto principal: Cinza escuro */
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Header (Cabeçalho) */
+header {
+    background-color: #1a496b; /* Azul escuro inspirado no logo */
+    color: white;
+    padding: 1rem 0; /* Menos padding para reduzir a margem do título */
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 10;
+}
+
+.header-content {
+    display: flex; /* Para alinhar o logo e o título lado a lado */
+    align-items: center; /* Centraliza verticalmente */
+    justify-content: center; /* Centraliza horizontalmente */
+    max-width: 90vw; /* Largura máxima para o conteúdo do header */
+    margin: 0 auto; /* Centraliza o conteúdo do header */
+}
+
+.header-logo {
+    height: 60px; /* Ajuste o tamanho do logo conforme necessário */
+    margin-right: 20px; /* Espaçamento entre o logo e o título */
+}
+
+h1 {
+    margin: 0;
+    font-size: 2.2em; /* Tamanho menor para o título principal */
+    letter-spacing: 0.5px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Main (Conteúdo Principal) */
+main {
+    max-width: 90vw; /* Ajustado para se adequar melhor ao novo cabeçalho */
+    margin: 30px auto;
+    padding: 30px;
+    background-color: #ffffff; /* Fundo do conteúdo principal: Branco puro */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    border: 1px solid #e0e0e0; /* Borda sutil */
+}
+
+/* Seções */
+section {
+    margin-bottom: 40px; /* Espaçamento entre as seções */
+    padding-bottom: 15px;
+}
+
+h2 {
+    color: #2b678c; /* Títulos de seção: Um tom de azul mais claro */
+    font-size: 1.8em;
+    border-bottom: 2px solid #ddd; /* Linha divisória mais fina */
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+    text-shadow: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Estilos para o mapa Leaflet */
+#leaflet-map {
+    height: 80vh;
+    width: 100%;
+    border: 1px solid #ccc; /* Adiciona uma borda sutil ao mapa */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Sombra mais suave */
+    border-radius: 8px;
+}
+
+/* Animação para Leaflet markers on hover */
+.leaflet-marker-icon {
+    transition: transform 0.2s ease-in-out;
+}
+
+.leaflet-marker-icon:hover {
+    transform: scale(1.2);
+}
+
+/* Estilos para a lista de colaboradores */
+#collaborator-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px; /* Menos espaçamento entre os itens */
+}
+
+#collaborator-list li {
+    background-color: #e6f2f8; /* Fundo dos itens da lista: Azul muito claro */
+    color: #333;
+    padding: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: 1px solid #cce0eb; /* Borda sutil nos itens */
+    font-size: 1em;
+    font-weight: 500; /* Menos negrito */
+}
+
+#collaborator-list li:hover {
+    background-color: #d1ecf6; /* Fundo ao passar o mouse: Azul um pouco mais escuro */
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Estilos para os botões */
+button {
+    background-color: #1a496b; /* Fundo do botão: Azul escuro do logo */
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1em;
+    margin-top: 25px;
+    transition: background-color 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+button:hover {
+    background-color: #2b678c; /* Fundo ao passar o mouse: Azul mais claro */
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+button:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para botões dentro de popups do Leaflet */
+.leaflet-popup-content button.view-full-list-btn {
+    background-color: #2b678c; /* Azul para botões de popup */
+    color: white;
+    border: none;
+    padding: 7px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85em;
+    margin-top: 8px;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.leaflet-popup-content button.view-full-list-btn:hover {
+    background-color: #3e81a7; /* Azul mais claro no hover */
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* Garante que o texto dentro do popup seja legível */
+.leaflet-popup-content {
+    color: #333;
+}
+
+/* Estilos para o contêiner da carteirinha 3D */
+#card-3d-container {
+    width: 100%;
+    height: 500px;
+    background-color: #e0e6eb; /* Fundo do contêiner 3D: Cinza azulado claro */
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 30px;
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilos para o template 2D da carteirinha (usado para gerar a textura) */
+#card-2d-template {
+    width: 600px;
+    height: 380px;
+    display: flex;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    position: relative;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.card-front, .card-back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    box-sizing: border-box;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-logo {
+    width: 100px;
+    height: auto;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.card-title {
+    font-size: 1.8em;
+    font-weight: bold;
+    position: absolute;
+    top: 20px;
+    left: 140px;
+}
+
+.card-subtitle {
+    font-size: 1.1em;
+    font-weight: bold;
+    position: absolute;
+    top: 50px;
+    left: 140px;
+    color: #666;
+}
+
+.profile-pic {
+    width: 120px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 2px solid #ddd;
+    position: absolute;
+    top: 90px;
+    right: 20px;
+}
+
+.card-details {
+    position: absolute;
+    top: 90px;
+    left: 20px;
+    font-size: 0.9em;
+    color: #333;
+}
+
+.card-details p {
+    margin: 5px 0;
+}
+
+.process-codes-summary {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    font-size: 0.9em;
+    color: #333;
+}
+
+.code-status {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border: 1px solid #666;
+    margin-left: 5px;
+    vertical-align: middle;
+    background-color: #eee;
+}
+
+.code-status.active {
+    background-color: #00cc00;
+    border-color: #00aa00;
+}
+
+.process-code-definition {
+    width: calc(100% - 150px);
+    font-size: 0.9em;
+    text-align: left;
+    margin-top: 20px;
+    color: #333;
+}
+
+.process-code-definition h3 {
+    margin-top: 0;
+    font-size: 1.1em;
+    color: #004d99;
+    margin-bottom: 10px;
+}
+
+.process-code-definition p {
+    margin: 5px 0;
+}
+
+.technical-sidebar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 80px;
+    height: 100%;
+    background-color: #004d99;
+    color: white;
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+    text-orientation: mixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2em;
+    padding: 10px;
+    box-sizing: border-box;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px; /* Menos padding */
+    color: #666; /* Cor do texto do rodapé: Cinza médio */
+    font-size: 0.85em;
+    margin-top: 40px;
+    background-color: #e6e9ed; /* Fundo do rodapé: Cinza claro */
+    border-top: 1px solid #dcdcdc; /* Borda superior */
+}

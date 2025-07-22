@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualização de Carteirinha Online - Yazaki</title>
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script type="importmap">
+        {
+          "imports": {
+            "three": "https://unpkg.com/three@0.165.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.165.0/examples/jsm/"
+          }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="logo.png" alt="Logo Yazaki" class="header-logo">
+            <h1>TLS - TECHNICAL LICENSE SYSTEM</h1>
+        </div>
+    </header>
+
+    <main>
+        <section id="map-section">
+            <div id="leaflet-map" style="height: 1100px; width: 100%; max-width: 3600px; margin: 0 auto; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);"></div>
+        </section>
+
+        <section id="collaborator-list-section" style="display: none;">
+            <h2>Colaboradores Capacitados em <span id="selected-location-name"></span></h2>
+            <ul id="collaborator-list">
+                </ul>
+            <button id="back-to-map">Voltar ao Mapa</button>
+        </section>
+
+        <section id="card-viewer-section" style="display: none;">
+            <h2>TLS DE: <span id="card-holder-name"></span></h2>
+            <div id="card-3d-container">
+                </div>
+            
+            <div id="card-2d-template" style="display: none;">
+                <div class="card-front">
+                    <img src="yazaki_logo.png" Yazaki Logo" class="card-logo"> <div class="card-title">Certificate</div>
+                    <div class="card-subtitle">YM - Technical License System</div>
+                    <div class="card-details">
+                        <p><strong>Expiration date:</strong> <span id="exp-date"></span></p>
+                        <p><strong>Name:</strong> <span id="card-name-front"></span></p>
+                        <p><strong>Certified Company:</strong> <span id="cert-company"></span></p>
+                        <p><strong>Certified Dept:</strong> <span id="cert-dept"></span></p>
+                        <p><strong>Issue number:</strong> <span id="issue-num"></span></p>
+                        <p><strong>[Type]</strong> <span id="card-type"></span></p>
+                    </div>
+                    <img id="card-profile-pic" src="profile.jpg "Profile Picture" class="profile-pic"> <div class="process-codes-summary">
+                        <div>BL-A <span class="code-status" id="code-bla-front"></span></div>
+                        <div>EC-M <span class="code-status" id="code-ecm-front"></span></div>
+                        <div>EC-A <span class="code-status" id="code-eca-front"></span></div>
+                    </div>
+                </div>
+                <div class="card-back">
+                    <div class="process-code-definition">
+                        <h3>Process Code Definition</h3>
+                        <p>BL-A: Balance Excel -Ato</p>
+                        <p>EC-A: Est. Capacidade -Ato</p>
+                        <p>EC-M: Est. Capacidade -Mae</p>
+                        </div>
+                    <div class="technical-sidebar">TECHNICAL (TC)</div>
+                </div>
+            </div>
+            <button id="back-to-list">Voltar à Lista</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Sistema de TLS Yazaki.</p>
+    </footer>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>
