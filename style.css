@@ -346,3 +346,12 @@ footer {
     background-color: #e6e9ed; /* Fundo do rodapé: Cinza claro */
     border-top: 1px solid #dcdcdc; /* Borda superior */
 }
+
+#export-pdf-btn {
+    background-color: #4CAF50; /* Verde */
+    margin-left: 15px;
+}
+
+#export-pdf-btn:hover {
+    background-color: #45a049;
+}

@@ -107,9 +107,11 @@ const backToMapBtn = document.getElementById('back-to-map'); // Botão "Voltar a
 const cardHolderName = document.getElementById('card-holder-name'); // Span para o nome na carteirinha
 const card3dContainer = document.getElementById('card-3d-container'); // Div que hospeda o canvas 3D
 const backToListBtn = document.getElementById('back-to-list'); // Botão "Voltar à Lista"
+const exportPdfBtn = document.getElementById('export-pdf-btn');
 
 // --- Variáveis Leaflet (para o Mapa) ---
 let map; // Objeto mapa do Leaflet
+let currentCardData = null;
 
 // --- Variáveis Three.js (para a Carteirinha 3D) ---
 let scene, camera, renderer, controls, cardMesh; // Componentes fundamentais da cena 3D
@@ -200,7 +202,7 @@ function initMap() {
         if (location && location.coordinates) {
             // Usa o ícone personalizado ao criar o marcador
             const marker = L.marker(location.coordinates, { icon: customIcon }).addTo(map);
-            
+
             // Adiciona a sigla da planta acima do marcador
             const plantAbbr = plantAbbreviations[locationName];
             if (plantAbbr) {
@@ -410,7 +412,7 @@ async function drawCardToCanvas(cardData, isFront, textureWidth, textureHeight) 
         ctx.font = 'bold ' + (textureHeight * 0.05) + 'px Arial';
         ctx.fillStyle = '#666'; // Cor do subtítulo
         ctx.textAlign = 'right'; // Alinha o texto à direita
-        
+
         // Divide o texto em duas linhas para a quebra de linha
         const subtitlePart1 = 'YM - Technical';
         const subtitlePart2 = 'License System';
@@ -521,7 +523,7 @@ async function updateCardTexture(cardData) {
         // A ordem dos materiais no BoxGeometry é importante: 4 para frente (+z), 5 para trás (-z)
         cardMesh.material[4].map = frontTexture; 
         cardMesh.material[5].map = backTexture;  
-        
+
         // Marca que os materiais precisam ser atualizados na próxima renderização
         cardMesh.material[4].needsUpdate = true;
         cardMesh.material[5].needsUpdate = true;
@@ -556,6 +558,7 @@ async function updateCardTexture(cardData) {
 
 // Exibe a seção da carteirinha e a popula com os dados do colaborador
 function showCard(cardData) {
+    currentCardData = cardData; // Armazena os dados do cartão atual
     cardHolderName.textContent = cardData.name; // Atualiza o nome do titular da carteirinha no título da seção.
     // Garante que a cena 3D esteja inicializada antes de tentar renderizar o cartão.
     if (!scene) {
@@ -563,6 +566,29 @@ function showCard(cardData) {
     }
     updateCardTexture(cardData); // Atualiza o conteúdo visual da carteirinha 3D com os dados do colaborador.
     showSection('card-viewer-section'); // Exibe a seção da carteirinha 3D.
+}
+
+async function exportCardAsPDF() {
+    if (!currentCardData) {
+        alert("Por favor, selecione um crachá para exportar.");
+        return;
+    }
+
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF({
+        orientation: 'landscape',
+        unit: 'mm',
+        format: [85.6, 53.98] // Tamanho de cartão de crédito
+    });
+
+    const frontCanvas = (await drawCardToCanvas(currentCardData, true, 1024, 640)).image;
+    const backCanvas = (await drawCardToCanvas(currentCardData, false, 1024, 640)).image;
+
+    pdf.addImage(frontCanvas, 'PNG', 0, 0, 85.6, 53.98);
+    pdf.addPage();
+    pdf.addImage(backCanvas, 'PNG', 0, 0, 85.6, 53.98);
+
+    pdf.save(`Cracha_${currentCardData.name.replace(/ /g, '_')}.pdf`);
 }
 
 // --- EventListeners Globais ---
@@ -576,6 +602,9 @@ backToListBtn.addEventListener('click', () => {
     const currentLocation = selectedLocationName.textContent; // Obtém o nome da localização que estava selecionada.
     showCollaborators(currentLocation); // Volta para a lista de colaboradores daquela localização.
 });
+
+exportPdfBtn.addEventListener('click', exportCardAsPDF);
+
 
 // --- Inicialização do Site ---
 // Chamadas das funções de inicialização quando a página é carregada.

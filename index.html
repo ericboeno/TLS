@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TLS Technical License System - Yazaki</title>
-    
+
     <link rel="stylesheet" href="style.css">
-    
+
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
     <script type="importmap">
         {
@@ -44,7 +45,7 @@
             <h2>TLS DE: <span id="card-holder-name"></span></h2>
             <div id="card-3d-container">
                 </div>
-            
+
             <div id="card-2d-template" style="display: none;">
                 <div class="card-front">
                     <img src="yazaki_logo.png" Yazaki Logo" class="card-logo"> <div class="card-title">Certificate</div>
@@ -74,6 +75,7 @@
                 </div>
             </div>
             <button id="back-to-list">Voltar à Lista</button>
+            <button id="export-pdf-btn">Exportar para PDF</button>
         </section>
     </main>
 
