@@ -15,6 +15,17 @@ const cardTypeColors = {
     "DEFAULT": '#808080' // Cor padrão para tipos não definidos (cinza)
 };
 
+// --- Mapeamento de Plantas para Nomes Completos para Legenda ---
+const plantAbbreviations = {
+    "Escobar, CT, Argentina": "YAS",
+    "Tatuí, SP, Brasil": "YBL-T",
+    "Matozinhos, MG, Brasil": "YBM",
+    "Bonito, PE, Brasil": "YBL-B",
+    "Irati, PR, Brasil": "YBL-I",
+    "Nossa Senhora do Socorro, SE": "YBL-SE", // Adicionado conforme solicitação
+    "Asunción, Paraguai": "YPY", // Adicionado conforme solicitação
+};
+
 // --- Processamento dos Dados Importados do Excel (data.js) ---
 // Esta seção organiza os dados brutos de 'allCollaboratorsData' em uma estrutura
 // mais fácil de usar para o mapa (agrupado por localização) e para exibir as listas de colaboradores.
@@ -190,6 +201,24 @@ function initMap() {
             // Usa o ícone personalizado ao criar o marcador
             const marker = L.marker(location.coordinates, { icon: customIcon }).addTo(map);
             
+            // Adiciona a sigla da planta acima do marcador
+            const plantAbbr = plantAbbreviations[locationName];
+            if (plantAbbr) {
+                const labelIcon = L.divIcon({
+                    className: 'plant-label', // Classe CSS para estilizar o rótulo
+                    html: `<div style="color: black; font-weight: bold; font-size: 1.1em; white-space: nowrap; text-align: center;">${plantAbbr}</div>`,
+                    iconSize: [0, 0], // Tamanho 0, o tamanho será definido pelo conteúdo
+                    iconAnchor: [0, 0] // Posição da "âncora" do ícone. Ajustaremos com offset.
+                });
+
+                // Posiciona o rótulo ligeiramente acima e centralizado com base no marcador do pin
+                // Ajuste o valor '-45' para mover o texto para cima ou para baixo conforme necessário.
+                L.marker(location.coordinates, {
+                    icon: labelIcon,
+                    offset: [-15, -45] // Ajuste este valor conforme necessário. O primeiro valor para x, o segundo para y.
+                }).addTo(map);
+            }
+
             // --- Conteúdo dinâmico do popup (o "visor") ---
             let popupContentHtml = `<div style="color: #333;"><b>${locationName}</b><br><hr style="border-top: 1px solid #ccc; margin: 5px 0;">`; // Adiciona cor para o texto do popup e estilo para o hr
             const collaboratorsForPopup = location.collaborators;

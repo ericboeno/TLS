@@ -26,11 +26,23 @@ header {
     justify-content: center; /* Centraliza horizontalmente */
     max-width: 90vw; /* Largura máxima para o conteúdo do header */
     margin: 0 auto; /* Centraliza o conteúdo do header */
+    position: relative; /* Adicionado para posicionamento absoluto do logo */
 }
 
+/* Estilo para o novo logo Yazaki no canto esquerdo */
+.yazaki-main-logo {
+    position: absolute; /* Posicionamento absoluto dentro do header-content */
+    left: 20px; /* Distância da margem esquerda */
+    height: 40px; /* Altura do logo, ajustada para menor */
+    top: 50%; /* Centraliza verticalmente */
+    transform: translateY(-50%); /* Ajuste para centralização precisa */
+}
+
+/* Opcional: Ajustar o logo existente se ele for o logo de 'engenharia de processos' */
 .header-logo {
     height: 60px; /* Ajuste o tamanho do logo conforme necessário */
     margin-right: 20px; /* Espaçamento entre o logo e o título */
+    /* Removido: display: none; */ 
 }
 
 h1 {
